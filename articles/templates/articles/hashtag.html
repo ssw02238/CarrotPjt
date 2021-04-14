@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ hashtag.content }}</h1>
+  <p>{{ articles|length }}개의 게시글이 {{ hashtag.content }}를 태그중입니다.</p>
+  
+  <hr>
+
+  <h2>{{ hashtag.content }}를 태그한 게시글</h2>
+  {% for article in articles %}
+    <p>제목 : {{ article.title }}</p>
+    <a href="{% url 'articles:detail' article.pk %}">보러가기</a>
+    <hr>
+  {% endfor %}
+{% endblock %}

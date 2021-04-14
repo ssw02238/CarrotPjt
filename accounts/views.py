@@ -94,3 +94,21 @@ def change_password(request):
         'form': form,
     }
     return render(request, 'accounts/change_password.html', context)
+
+
+def profile(request, user_id):
+    person = get_object_or_404(get_user_model(), pk=user_id)
+    context = {
+        'person': person,
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+def follow(request, user_id):
+    person = get_object_or_404(get_user_model(), pk=user_id)
+    if request.user != person:
+        if request.user in person.followers.all():
+            person.followers.remove(request.user)
+        else:
+            person.followers.add(request.user)
+    return redirect('accounts:profile', person.pk)

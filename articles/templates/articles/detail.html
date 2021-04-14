@@ -1,22 +1,37 @@
 {% extends 'base.html' %}
+{% load make_hashtag_link %}
 {% load bootstrap5 %}
 
 {% block content %}
   <h1>세부사항</h1>
   <hr>
+  <p>작성자: <a href="{% url 'accounts:profile' article.user.pk %}"> {{ article.user }}</a></p>
   <h3>제목: {{ article.title }} ({{ article.comment_set.all|length }})</h3>
   <br>
+  <p>내용 : {{ article|hashtag_link|safe }}</p><br>
   <img src="{{ article.image.url }}" alt="{{ article.image}}">
   <br>
-  <p>내용: {{ article.content }}</p>
   <hr>
-  <div class="d-inline">
-    <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-info">수정하기</button></a>
-    <form action="{% url 'articles:delete' article.pk %}" method="POST">
-      {% csrf_token %}
-      <button class="btn btn-danger">삭제</button>
-    </form>
-  </div>
+  {% comment %} 좋아요, 몇 명 좋아요 {% endcomment %}
+  <form action="{% url 'articles:like' article.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in article.like_users.all %}
+      <button class="btn btn-link"><i class="fas fa-heart fa-2x" style="color:crimson;"></i></button>
+    {% else %}
+      <button class="btn btn-link"><i class="far fa-heart fa-2x" style="color:crimson;"></i></button>
+    {% endif %}
+    {{ article.like_users.all|length }}명이 좋아합니다.
+  </form>
+
+  {% if request.user == article.user %}
+    <div class="d-inline">
+      <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-info">수정하기</button></a>
+      <form action="{% url 'articles:delete' article.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger">삭제</button>
+      </form>
+    </div>
+  {% endif %}
   <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
     {% csrf_token %}
     {% bootstrap_form comment_form %}
