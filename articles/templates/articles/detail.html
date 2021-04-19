@@ -9,7 +9,9 @@
   <h3>제목: {{ article.title }} ({{ article.comment_set.all|length }})</h3>
   <br>
   <p>내용 : {{ article|hashtag_link|safe }}</p><br>
-  <img src="{{ article.image.url }}" alt="{{ article.image}}">
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image}}">
+  {% endif %}
   <br>
   <hr>
   {% comment %} 좋아요, 몇 명 좋아요 {% endcomment %}
