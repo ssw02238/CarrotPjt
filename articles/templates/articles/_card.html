@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'stylesheets/style.css' %}">
+
 <div class="card h-100" style="width: 18rem;">
   <a href="{% url 'articles:detail' article.pk %}">
     {% if article.image %}
@@ -5,8 +8,13 @@
     {% endif %}
 
     <div class="card-body">
-      <h5 class="card-title">{{ article.pk }}.{{ article.title }}</h5>
-      <p class="card-text">{{ article.content }}</p>
+      <h2 class="card-title">{{ article.pk }}.{{ article.title }}</h2>
+      {% comment %} <p class="card-price">{{ article.price }}</p> {% endcomment %}
+      <div class="card-counts">
+        <span>관심 {{ article.like_users.all|length }}</span>
+        ∙
+        <span>댓글 {{ article.comment_set.all|length }}</span>
+      </div>
     </div>
   </a>
 </div>
