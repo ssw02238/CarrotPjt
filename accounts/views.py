@@ -57,7 +57,7 @@ def signup(request):
 @require_http_methods(['GET', 'POST'])
 def update(request):
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('articles:index')
@@ -105,10 +105,12 @@ def profile(request, user_id):
 
 
 def follow(request, user_id):
-    person = get_object_or_404(get_user_model(), pk=user_id)
-    if request.user != person:
-        if request.user in person.followers.all():
-            person.followers.remove(request.user)
-        else:
-            person.followers.add(request.user)
-    return redirect('accounts:profile', person.pk)
+    if request.user.is_authenticated:
+        person = get_object_or_404(get_user_model(), pk=user_id)
+        if request.user != person:
+            if request.user in person.followers.all():
+                person.followers.remove(request.user)
+            else:
+                person.followers.add(request.user)
+        return redirect('accounts:profile', person.pk)
+    return redirect('accounts:login')

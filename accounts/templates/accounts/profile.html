@@ -3,44 +3,71 @@
 {% block content %}
 
 <div class="d-flex justify-content-around" style="margin-top: 30px; margin-bottom: 30px;">
+  {# 프로필 사진 #}
   <div style="width: 150px; height: 150px;">
-    <img style="width: 100%; height: 100%%;" src="{% static 'images/profile_rabbit.png' %}" alt="profile image">
+    {% if person.profile_image %}
+      <img style="width: 100%; height: 100%;" src="{{ person.profile_image.url }}" alt="profile image">
+    {% else %}
+      <img style="width: 100%; height: 100%;" src="{% static 'images/profile_rabbit.png' %}" alt="profile image">
+    {% endif %}
   </div>
   <div>
-    <h3>{{ person.username }}'s Profile</h3> <br>
-    <ul>
-      <li>
-        <span>articles</span>
-        {{ person.article_set.all|length }}
-      </li>
-      <li>
+    {# 이름, 설정버튼 #}
+    <span class="h3" style="margin-right: 15px; margin-bottom: 40px;">{{ person.username }}'s Profile</span>
+    {% if request.user == person %}
+    <span class="dropdown">
+      <a href="#" role="button" data-bs-toggle="dropdown">
+        <i class="fas fa-cog"></i>
+      </a>
+      <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'accounts:update' %}">Update info</a></li>
+      <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a></li>
+      </ul>
+    </span>
+    {% endif %}
+    {# 게시글, 팔로워, 팔로잉 수 #}
+    <ul class="my-3">
+      <li style="float: left; margin-right: 15px;">
         <span>followers</span>
         {{ person.followers.all|length }}
       </li>
-      <li>
+      <li style="margin-right: 15px;">
         <span>followings</span>
         {{ person.followings.all|length }}
       </li>
+      <li>
+        <span>작성글</span>
+        {{ person.article_set.all|length }}
+      </li>
     </ul>
+    {# 팔로우 버튼 #}
+    {% if request.user.is_authenticated %}
+      <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user != person %}
+        {% if request.user in person.followers.all %}
+          <button class="btn btn-outline-secondary btn-sm">[UnFollow]</button>
+        {% else %}
+          <button class="btn btn-outline-secondary btn-sm">[Follow]</button>
+        {% endif %}
+      {% endif %}
+      </form>
+    {% endif %}
   </div>
 </div>
-<form action="{% url 'accounts:follow' person.pk %}" method="POST">
-  {% csrf_token %}
-  {% if request.user != person %}
-    {% if request.user in person.followers.all %}
-      <button class="btn btn-primary">[UnFollow]</button>
-    {% else %}
-      <button class="btn btn-primary">[Follow]</button>
-    {% endif %}
-  {% endif %}
-  </form>
 <hr>
-<h3>게시물</h3>
+{# 게시물 #}
 <div class="d-flex justify-content-start">
   {% for article in person.article_set.all %}
+    <div class="m-3">
       <a href="{% url 'articles:detail' article.pk %}">
-      <img class="m-3" style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}">
+      <img style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}">
       </a>
+      <div class="d-flex justify-content-center">
+        <span style="margin-right: 10px;"><i class="fas fa-heart" style="color: crimson;"></i> {{ article.like_users.all|length }}</span>
+        <span><i class="far fa-comment" style="color: blue;"></i> {{ article.comment_set.all|length }}</span>
+      </div>
+    </div>
   {% endfor %}
 </div>
 

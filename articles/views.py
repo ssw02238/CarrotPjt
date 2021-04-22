@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST, require_http_methods, req
 from django.contrib.auth.decorators import login_required
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
+from wordcloud import WordCloud
 
 # Create your views here.
 @require_safe
@@ -129,3 +130,20 @@ def hashtag(request, hash_pk):
     }
     return render(request, 'articles/hashtag.html', context)
 	
+
+def wordcloud(request):
+    
+    # def my_color_func(word, font_size, position, orientation, random_state=None,
+    #                 **kwargs):
+    #     return "hsl(219, 40%%, %d%%)" % random.randint(60, 100)
+
+    # 전체 해시태그 받아오기
+    hashtags = Hashtag.objects.all()
+    # wc = WordCloud().generate(hashtag)
+    # image = wc.to_image()
+
+    context = {
+        'hashtags': hashtags, 
+        # 'image': image,
+    }
+    return render(request, 'articles/wordcloud.html', context)
