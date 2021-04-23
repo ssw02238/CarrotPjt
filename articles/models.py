@@ -28,5 +28,5 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-    
-
+class HashtagCloud(models.Model):
+    cloud = models.ImageField()

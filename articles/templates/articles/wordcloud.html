@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h2>WordCloud</h2>
-  {% for hashtag in hashtags %}
-    {{ hashtag }}
-  {% endfor %}
-  {{ image }}
+  <img src="{% static 'articles/cloud.jpeg' %}" alt="cloud"> 
+  {% comment %} <img src="{{ my_cloud.cloud.url }}" alt="image"> {% endcomment %}
+  <br>
+  <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock %}

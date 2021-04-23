@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_http_methods, require_safe
 from django.contrib.auth.decorators import login_required
-from .models import Article, Comment, Hashtag
+from .models import Article, Comment, Hashtag, HashtagCloud
 from .forms import ArticleForm, CommentForm
 from wordcloud import WordCloud
 
@@ -131,19 +131,25 @@ def hashtag(request, hash_pk):
     return render(request, 'articles/hashtag.html', context)
 	
 
-def wordcloud(request):
-    
-    # def my_color_func(word, font_size, position, orientation, random_state=None,
-    #                 **kwargs):
-    #     return "hsl(219, 40%%, %d%%)" % random.randint(60, 100)
-
+def make_cloud(request):
     # 전체 해시태그 받아오기
     hashtags = Hashtag.objects.all()
-    # wc = WordCloud().generate(hashtag)
-    # image = wc.to_image()
+    text = ''.join([str(i) for i in hashtags])
+    # 이미지 만들기
+    wc = WordCloud().generate(text)
+    image = wc.to_image()
+    # PIL 파일을 jpeg 파일로 바꾸기
+    # 일단 절대경로로
+    image.save('cloud.jpeg')
+    # 이미지 저장하기
+    # 모델에 저장할 수는 없는걸까?
+    # my_cloud = HashtagCloud.objects.create(cloud=image)
+    return redirect('articles:wordcloud')
+    # return redirect('articles:index')
 
-    context = {
-        'hashtags': hashtags, 
-        # 'image': image,
-    }
-    return render(request, 'articles/wordcloud.html', context)
+def wordcloud(request):
+    # my_cloud = get_object_or_404(WordCloud, pk=cloud_pk)
+    # context = {
+    #     'my_cloud': my_cloud, 
+    # }
+    return render(request, 'articles/wordcloud.html')
