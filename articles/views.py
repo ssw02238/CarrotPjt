@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_http_methods, require_safe
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from wordcloud import WordCloud, STOPWORDS
 from .models import Article, Comment, Hashtag, HashtagCloud
 from .forms import ArticleForm, CommentForm
-from wordcloud import WordCloud
 
 # Create your views here.
 @require_safe
@@ -135,21 +136,12 @@ def make_cloud(request):
     # 전체 해시태그 받아오기
     hashtags = Hashtag.objects.all()
     text = ''.join([str(i) for i in hashtags])
+    # stopwords
+    stopwords = set(STOPWORDS)
+    stopwords.add('#')
     # 이미지 만들기
-    wc = WordCloud().generate(text)
+    wc = WordCloud(stopwords=stopwords).generate(text)
     image = wc.to_image()
-    # PIL 파일을 jpeg 파일로 바꾸기
-    # 일단 절대경로로
-    image.save('cloud.jpeg')
-    # 이미지 저장하기
-    # 모델에 저장할 수는 없는걸까?
-    # my_cloud = HashtagCloud.objects.create(cloud=image)
-    return redirect('articles:wordcloud')
-    # return redirect('articles:index')
-
-def wordcloud(request):
-    # my_cloud = get_object_or_404(WordCloud, pk=cloud_pk)
-    # context = {
-    #     'my_cloud': my_cloud, 
-    # }
+    # PIL 파일을 jpeg 파일로 바꿔서 static 폴더에 저장하기
+    image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')

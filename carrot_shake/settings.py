@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'carrot_shake' / 'static', BASE_DIR / 'accounts' / 'static',]
+STATICFILES_DIRS = [BASE_DIR / 'carrot_shake' / 'static', BASE_DIR / 'accounts' / 'static', BASE_DIR / 'articles' / 'static',]
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/' 
 
