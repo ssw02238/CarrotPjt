@@ -74,13 +74,13 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'images/rabbit3.jpg' %}"class="d-block w-100" alt="image">
+        <img src="{% static 'images/rabbitpic3.jpg' %}"class="d-block w-100" alt="image">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'images/2rabbit.jpg' %}"class="d-block w-100" alt="rabbit1">
+        <img src="{% static 'images/rabbitpic.jpg' %}"class="d-block w-100" alt="rabbit1">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'images/1rabbit.jpg' %}"class="d-block w-100" alt="rabbit2">
+        <img src="{% static 'images/rabbitpic2.jpg' %}"class="d-block w-100" alt="rabbit2">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -123,18 +123,13 @@
       <h3>Link</h3>
       <ul class="w3-ul w3-hoverable">
         <li class="w3-padding-16">
-          <form action="{% url 'accounts:delete' %}" method="POST" class="w3-left w3-margin-right" style="width:100px;height: 50px;">
-          {% comment %} d-flex justify-content-end {% endcomment %}
-          {% csrf_token %}
-          <button class="btn btn-outline-danger">User:Delete</button>
-          </form>
-          <span class="w3-large">Delete</span><br>
-          <span>사용자 계정 삭제는 다음 버튼을 눌러주세요 </span>
+          <a href="https://www.daangn.com/"><button class="btn btn-outline-danger">당근마켓</button></a>
+          <span> 당근마켓으로 가기! </span>
             
         </li>
         <li class="w3-padding-16">
         <a href="#">
-            <img src="{% static 'images/rabbit.jpg' %}" class="w3-left w3-margin-right" style="width:100px;height: 50px;">
+            <img src="{% static 'images/1rabbit.jpg' %}" class="w3-left w3-margin-right" style="width:80px;height: 40px;">
             <span class="w3-large">Sending</span><br>
             <span>언제든지 문의해주세요 </span>
         </a>
@@ -145,11 +140,30 @@
 
     <div class="w3-third w3-serif">
       <h3>POPULAR TAGS</h3>
-      <p>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom"><a href="http://127.0.0.1:8000/articles/1/hashtag/">인기매물1"happy"</a></span> 
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom"><a href="#">인기매물2</a></span> 
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom"><a href="#">인기매물3</a></span> 
-      </p>
+      <div class ="w3-third ms-4" >
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><a href="http://127.0.0.1:8000/articles/1/hashtag/">Happy</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td><a href="http://127.0.0.1:8000/articles/2/hashtag/">Server</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>###</td>
+          </tr>
+        </tbody>
+      </table>
+        
+      </div>
     </div>
   </footer>
 </div>
