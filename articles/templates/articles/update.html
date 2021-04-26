@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block content %}
-  <h1>수정</h1>
+  <h1 class="my-4">수정</h1>
   <form action="{% url 'articles:update' article.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
     <button class="btn btn-warning">제출</button>
   </form>
 {% endblock content %}
