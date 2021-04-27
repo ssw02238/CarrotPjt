@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 
-</style>
 {% block content %}
   <h1 class="my-4">새 거래 글쓰기</h1>
   <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">

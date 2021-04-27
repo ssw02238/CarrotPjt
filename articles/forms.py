@@ -5,12 +5,17 @@ from .models import Article, Comment
 class ArticleForm(forms.ModelForm):
     title = forms.CharField(
         label='',
+        # required = False, 
         widget=forms.TextInput(
             attrs={
                 'placeholder': '제목',
                 'maxlength': 10,
+                # 'required': False, # 안됨...
             }
         ),
+         error_messages={
+            'required': '제목이 유효하지 않습니다.',
+        }
     )
 
     price = forms.IntegerField(
@@ -18,8 +23,12 @@ class ArticleForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'placeholder': '가격',
+                # 'required': False,
             }
         ),
+        error_messages={
+            'required': '가격이 유효하지 않습니다.',
+        }
     )
 
     content = forms.CharField(
@@ -27,8 +36,12 @@ class ArticleForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'placeholder': '내용',
+                # 'required': False,
             }
         ),
+        error_messages={
+            'required': '내용이 유효하지 않습니다.',
+        }
     )
 
     class Meta:
