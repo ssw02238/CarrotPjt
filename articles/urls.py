@@ -12,7 +12,5 @@ urlpatterns = [
     path('<int:article_pk>/comment/<int:comment_pk>/delete', views.comment_delete, name='comment_delete'),
     path('<int:article_pk>/like', views.like, name='like'),
     path('<int:hash_pk>/hashtag/', views.hashtag, name='hashtag'),
-    # 문의사항 페이지 (윤서)
-    path('qna', views.question, name='question'),
 
 ]

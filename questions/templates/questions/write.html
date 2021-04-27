@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>새 글 작성</h1>
+  <form action="{% url 'questions:write' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <br>
+    <button class="btn btn-warning">제출</button>
+    <br>
+    <br>
+  </form>
+{% endblock content %}
+
