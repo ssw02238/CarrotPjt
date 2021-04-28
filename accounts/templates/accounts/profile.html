@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <br>
+{% comment %} 윤서 수정  {% endcomment %}
+{% if person.profile_image %}
+  <img src="{{ person.profile_image.url }}" alt="profile_image">
+{% endif %}
+
 <h2>{{ person.username }}'s Profile</h2> <br>
 <form action="{% url 'accounts:follow' person.pk %}" method="POST">
   {% csrf_token %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>세부사항</h1>
+  <hr>
+  <p>작성자: {{ question.user }}</p>
+  <h3>제목: {{ question.title }}</h3>
+  <br>
+  <p>내용 : {{ question.content }}</p>
+  <br>
+  <hr>
+
+  {% if request.user == question.user %}
+    <div class="d-inline">
+      {% comment %} <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-info">수정하기</button></a> {% endcomment %}
+      <form action="{% url 'questions:deleting' question.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger">삭제</button>
+      </form>
+    </div>
+  {% endif %}
+
+  <a href="{% url 'questions:indexing' %}">뒤로가기</a>
+{% endblock content %}
