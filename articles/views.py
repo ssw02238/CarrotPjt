@@ -3,7 +3,7 @@ from django.views.decorators.http import require_POST, require_http_methods, req
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from wordcloud import WordCloud, STOPWORDS
-from .models import Article, Comment, Hashtag, HashtagCloud
+from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 
 # Create your views here.
