@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Popular Hashtags</h2>
+  <div class="container">
+    <img src="{% static 'articles/cloud.jpeg' %}" alt="cloud"> 
+  </div>
+  <a href="{% url 'articles:index' %}">BACK</a>
+{% endblock %}
