@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:article_pk>/like', views.like, name='like'),
     path('<int:hash_pk>/hashtag/', views.hashtag, name='hashtag'),
     path('make_cloud/', views.make_cloud, name='make_cloud'),
+
 ]

@@ -130,7 +130,6 @@ def hashtag(request, hash_pk):
         'articles': articles,
     }
     return render(request, 'articles/hashtag.html', context)
-	
 
 def make_cloud(request):
     # 전체 해시태그 받아오기
@@ -145,3 +144,4 @@ def make_cloud(request):
     # PIL 파일을 jpeg 파일로 바꿔서 static 폴더에 저장하기
     image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')
+

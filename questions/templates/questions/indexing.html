@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center my-4">문의사항</h1>
+  <br>
+  <a href="{% url 'questions:write' %}"><button class="btn btn-light">새 글 작성하기</button></a>
+
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">작성자</th>
+      <th scope="col">제목</th>
+    </tr>
+  </thead>
+  {% for question in questions %}
+  <tbody>
+    <tr>
+      <th scope="row">{{ question.pk }}</th>
+      <td>{{ question.user }}</td>
+      <td><a href="{% url 'questions:detailing' question.pk %}">{{ question.title }}</a></td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table> 
+
+{% endblock content %}
