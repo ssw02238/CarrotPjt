@@ -2,7 +2,7 @@
 {% load bootstrap5 %}
 
 {% block content %}
-  <h1>새 글 작성</h1>
+  <h1 class="my-4">새 거래 글쓰기</h1>
   <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
