@@ -1,0 +1,12 @@
+/* articles_index */
+.card-counts {
+    color: #868e96;
+    font-size: 13px;
+}
+
+.card-price {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
