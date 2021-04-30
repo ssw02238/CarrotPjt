@@ -5,6 +5,7 @@ from django.conf import settings
 
 class Hashtag(models.Model):
     content = models.TextField(unique=True)
+    # article_cnt = models.IntegerField(default = 1) # 0을 기본 
 
     def __str__(self):
         return self.content
