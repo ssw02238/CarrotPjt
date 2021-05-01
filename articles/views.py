@@ -5,6 +5,7 @@ from django.conf import settings
 from wordcloud import WordCloud, STOPWORDS
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 @require_safe
