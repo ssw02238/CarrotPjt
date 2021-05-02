@@ -58,19 +58,28 @@
 </div>
 <hr>
 {# 게시물 #}
-<div class="d-flex justify-content-start">
+<div class="d-flex justify-content-start flex-wrap">
   {% for article in person.article_set.all %}
-    <div class="m-3">
     {% if article.image %}
-      <a href="{% url 'articles:detail' article.pk %}">
-        <img style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}">
-      </a>
-      <div class="d-flex justify-content-center">
-        <span style="margin-right: 10px;"><i class="fas fa-heart" style="color: crimson;"></i> {{ article.like_users.all|length }}</span>
-        <span><i class="far fa-comment" style="color: blue;"></i> {{ article.comment_set.all|length }}</span>
+      <div class="m-3">
+        <a href="{% url 'articles:detail' article.pk %}">
+          {% comment %} <img style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}"> {% endcomment %}
+          {% comment %} <div class="fw-bold d-flex justify-content-center mb-1">{{ article.title }}</div> {% endcomment %}
+          <img class="mb-2" src="{{ article.image_thumbnail_index.url }}" alt="{{ article.image_thumbnail_index }}">
+        </a>
+        <div class="d-flex justify-content-center">
+          <span style="margin-right: 10px;"><i class="fas fa-heart" style="color: crimson;"></i> {{ article.like_users.all|length }}</span>
+          <span><i class="far fa-comment" style="color: blue;"></i> {{ article.comment_set.all|length }}</span>
+        </div>
       </div>
-    {% endif %}
+    {% else %}
+    <div class="m-3 d-flex align-items-center">
+      <a href="{% url 'articles:detail' article.pk %}">
+        <span class="fw-bold d-flex justify-content-center mb-1">{{ article.title }}</span>
+      </a>
     </div>
+    {% endif %}
+    
   {% endfor %}
 </div>
 
