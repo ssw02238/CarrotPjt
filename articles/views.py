@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_http_methods, require_safe
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-# from wordcloud import WordCloud, STOPWORDS
+from wordcloud import WordCloud, STOPWORDS
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 
@@ -44,10 +44,12 @@ def detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     comment_form = CommentForm()
     comments = article.comment_set.all()
+    hashtags = article.hashtags.all()
     context = {
         'article': article,
         'comments': comments,
         'comment_form': comment_form,
+        'hashtags': hashtags,
     }
     return render(request, 'articles/detail.html', context)
 

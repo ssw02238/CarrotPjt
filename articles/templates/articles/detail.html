@@ -1,18 +1,46 @@
 {% extends 'base.html' %}
 {% load make_hashtag_link %}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block content %}
-  <h1>세부사항</h1>
+  <div class="my-4">
+    {% if article.image %}
+      <img src="{{ article.image.url }}" alt="{{ article.image}}">
+    {% endif %}
+  </div>
+
+  {% comment %} 프로필 {% endcomment %}
+  <a href="{% url 'accounts:profile' article.user.pk %}" class="nickname">
+    <div class="d-flex justify-content-start">
+      <div style="width: 40px; height: 40px;">
+        {% if article.user.profile_image %}
+          <span>
+            <img style="width: 100%; height: 100%;" src="{{ article.user.profile_image.url }}" alt="profile image">
+          </span>
+        {% else %}
+          <span>
+            <img style="width: 100%; height: 100%;" src="{% static 'images/profile_rabbit.png' %}" alt="profile image">
+          </span>
+        {% endif %}
+      </div>
+      <span class="ms-3 d-flex align-items-center">{{ article.user }}</span>
+    </div>
+  </a>
+  
   <hr>
-  <p>작성자: <a href="{% url 'accounts:profile' article.user.pk %}"> {{ article.user }}</a></p>
-  <h3>제목: {{ article.title }} ({{ article.comment_set.all|length }})</h3>
+  {% comment %} 글 내용 {% endcomment %}
+  <h1 class="article-title">{{ article.title }} ({{ article.comment_set.all|length }})</h1>
+  <div class="article-hashtag">
+    {% for hashtag in hashtags %}
+      <span ><a href="{% url 'articles:hashtag' hashtag.pk %}" style="color: #868e96;">{{ hashtag }}</a></span>
+    {% endfor %}
+    <p>{{ article.updated_at }}</p>
+  </div>
+  <div style="font-size: 18px;font-weight: bold;">{{ article.price }}원</div>
   <br>
-  <p>내용 : {{ article|hashtag_link|safe }}</p><br>
-  {% if article.image %}
-    <img src="{{ article.image.url }}" alt="{{ article.image}}">
-  {% endif %}
-  <br>
+  <p>{{ article|hashtag_link|safe }}</p>
+  <p style="color: #868e96;font-size: 13px;">관심 {{ article.like_users.all|length }} ∙ 댓글 {{ article.comment_set.all|length }}</p>
   <hr>
   {% comment %} 좋아요, 몇 명 좋아요 {% endcomment %}
   <form action="{% url 'articles:like' article.pk %}" method="POST">
@@ -26,26 +54,28 @@
   </form>
 
   {% if request.user == article.user %}
-    <div class="d-inline">
-      <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-info">수정하기</button></a>
-      <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    <div class="my-3">
+      <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-outline-secondary btn-sm">수정</button></a>
+      <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline">
         {% csrf_token %}
-        <button class="btn btn-danger">삭제</button>
+        <button class="btn btn-outline-danger btn-sm">삭제</button>
       </form>
     </div>
   {% endif %}
-  <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+  <form action="{% url 'articles:comment_create' article.pk %}" method="POST" class="mt-5">
     {% csrf_token %}
     {% bootstrap_form comment_form %}
-    <button class="btn btn-outline-secondary">제출</button>
+    <button class="btn btn-outline-secondary mb-4">제출</button>
   </form>
   <ul>
     {% for comment in comments %}
-      <li>{{ comment.content }}</li>
-      <form action="{% url 'articles:comment_delete' article.pk comment.pk %}">
-        {% csrf_token %}
-        <button class="btn btn-danger">delete</button>
-      </form>
+      <div>
+        <li class="my-2 me-4 d-inline">{{ comment.content }}</li>
+        <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" class="d-inline">
+          {% csrf_token %}
+          <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
+        </form>
+      </div>
     {% endfor %}
   </ul>
   <a href="{% url 'articles:index' %}">뒤로가기</a>
