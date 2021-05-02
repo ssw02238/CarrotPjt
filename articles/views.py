@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_http_methods, require_safe
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from wordcloud import WordCloud, STOPWORDS
+# from wordcloud import WordCloud, STOPWORDS
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 

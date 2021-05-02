@@ -61,13 +61,15 @@
 <div class="d-flex justify-content-start">
   {% for article in person.article_set.all %}
     <div class="m-3">
+    {% if article.image %}
       <a href="{% url 'articles:detail' article.pk %}">
-      <img style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}">
+        <img style="width: 300px; height: 300px;" src="{{ article.image.url }}" alt="{{ article.image }}">
       </a>
       <div class="d-flex justify-content-center">
         <span style="margin-right: 10px;"><i class="fas fa-heart" style="color: crimson;"></i> {{ article.like_users.all|length }}</span>
         <span><i class="far fa-comment" style="color: blue;"></i> {{ article.comment_set.all|length }}</span>
       </div>
+    {% endif %}
     </div>
   {% endfor %}
 </div>
