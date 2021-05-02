@@ -27,7 +27,7 @@
           </span>
         {% endif %}
       </div>
-      <span class="ms-3 d-flex align-items-center">{{ article.user }}</span>
+      <span class="ms-3 d-flex align-items-center fw-bold">{{ article.user }}</span>
     </div>
   </a>
   
@@ -55,7 +55,7 @@
     {% endif %}
     {{ article.like_users.all|length }}명이 좋아합니다.
   </form>
-
+  {% comment %} 수정, 삭제 {% endcomment %}
   {% if request.user == article.user %}
     <div class="my-3">
       <a href="{% url 'articles:update' article.pk %}"><button class="btn btn-outline-secondary btn-sm">수정</button></a>
@@ -65,6 +65,8 @@
       </form>
     </div>
   {% endif %}
+
+  {% comment %} 코멘트 {% endcomment %}
   <form action="{% url 'articles:comment_create' article.pk %}" method="POST" class="mt-5">
     {% csrf_token %}
     {% bootstrap_form comment_form %}
@@ -73,7 +75,11 @@
   <ul>
     {% for comment in comments %}
       <div>
-        <li class="my-2 me-4 d-inline">{{ comment.content }}</li>
+        <li class="my-2 me-4 d-inline-block">
+          <div class="fw-bold">{{ comment.user }}</div>
+          <div>{{ comment.content }}</div>
+          <div style="font-size: 11px; color: #868e96;">{{ comment.updated_at }}</div>
+        </li>
         <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" class="d-inline">
           {% csrf_token %}
           <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
