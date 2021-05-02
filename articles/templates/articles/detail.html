@@ -4,9 +4,12 @@
 {% load static %}
 
 {% block content %}
-  <div class="my-4">
+{% comment %} 이미지 {% endcomment %}
+  <div class="my-5">
     {% if article.image %}
-      <img src="{{ article.image.url }}" alt="{{ article.image}}">
+      <div class="d-flex justify-content-center">
+        <img src="{{ article.image_thumbnail_detail.url }}" alt="{{ article.image_thumbnail_detail }}">
+      </div>
     {% endif %}
   </div>
 
