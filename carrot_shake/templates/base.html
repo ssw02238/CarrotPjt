@@ -49,6 +49,31 @@
       list-style: none;
       padding-left: 0px;
     }
+    {% comment %} articles의 css가 먹히지 않아서 사용 - detail 클래스 {% endcomment %}
+    .nickname {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+    color: #212529;
+    margin-top: 25px;
+    padding-bottom: 23px;
+    }
+
+    .article-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.6px;
+    }
+
+    .article-hashtag {
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 1.46;
+      letter-spacing: -0.6px;
+      color: #868e96;
+    }
 
   </style>
 </head>
@@ -68,13 +93,13 @@
           {% comment %} <a class="nav-link text-dark" href="{% url 'accounts:update' %}">User:Update</a> {% endcomment %}
           <form action="{% url 'accounts:logout' %}" method="POST">
             {% csrf_token %}
-            <button class="btn btn-link text-decoration-none text-dark">Logout</button>
+            <button class="btn btn-link text-decoration-none text-dark"><i class="fas fa-user-minus fa-lg"></i></button>
           </form>
         {# 익명 유저 #}
         {% else %}
-          <a class="navbar-brand" href="{% url 'articles:index' %}">Guest</a>
-          <a class="nav-link text-dark" href="{% url 'accounts:login' %}">Login</a>
-          <a class="nav-link text-dark" href="{% url 'accounts:signup' %}">Signup</a>
+          <a class="navbar-brand" href="{% url 'articles:index' %}"><i class="fas fa-question fa-lg"></i></a>
+          <a class="nav-link text-dark" href="{% url 'accounts:login' %}"><i class="far fa-user-circle fa-lg"></i></a>
+          <a class="nav-link text-dark" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus fa-lg"></i></a>
         {% endif %}
       </div>
     </div>

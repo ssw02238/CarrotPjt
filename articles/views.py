@@ -44,10 +44,12 @@ def detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     comment_form = CommentForm()
     comments = article.comment_set.all()
+    hashtags = article.hashtags.all()
     context = {
         'article': article,
         'comments': comments,
         'comment_form': comment_form,
+        'hashtags': hashtags,
     }
     return render(request, 'articles/detail.html', context)
 
