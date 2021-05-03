@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:hash_pk>/hashtag/', views.hashtag, name='hashtag'),
     path('hashtags/', views.popular_tag, name='popular_tag'),
     path('make_cloud/', views.make_cloud, name='make_cloud'),
+    path('popular_tags/', views.popular_tags, name='popular_tags'),
 ]

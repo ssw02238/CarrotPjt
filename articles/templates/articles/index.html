@@ -2,11 +2,13 @@
 
 {% block content %}
 
-
   <h1 class="text-center my-5">지금 올라오는 매물</h1>
+  <div class="d-flex justify-content-end">
     <form action="{% url 'articles:make_cloud' %}">
-    <button class="btn">make cloud</button>
+      <button class="btn btn-outline-primary">View Hashtag Cloud</button>
     </form>
+  </div>
+  <br>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
 
     {% for article in articles %}

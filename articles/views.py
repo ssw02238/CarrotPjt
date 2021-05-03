@@ -45,10 +45,12 @@ def detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     comment_form = CommentForm()
     comments = article.comment_set.all()
+    hashtags = article.hashtags.all()
     context = {
         'article': article,
         'comments': comments,
         'comment_form': comment_form,
+        'hashtags': hashtags,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -147,7 +149,6 @@ def make_cloud(request):
     image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')
 
-
 def popular_tag(request):
     # rank 확인용
     hashtags = Hashtag.objects.annotate(
@@ -158,4 +159,3 @@ def popular_tag(request):
         'hashtags': hashtags,
     }
     return render(request, 'articles/popular_tag.html', context)
-

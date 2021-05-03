@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Transpose
 
 # Create your models here.
 
@@ -18,6 +20,22 @@ class Article(models.Model):
     title = models.CharField(max_length=10)
     content = models.TextField()
     image = models.ImageField(blank=True)
+    image_thumbnail_detail = ImageSpecField(source='image',
+                                     processors=[
+                                         #  이미지 회전 방지
+                                         Transpose(),
+                                         ResizeToFill(670, 500)
+                                         ],
+                                     format='JPEG',
+                                     options={'quality': 100})
+    image_thumbnail_index = ImageSpecField(source='image',
+                                     processors=[
+                                        #  이미지 회전 방지
+                                         Transpose(),
+                                         ResizeToFill(200, 200)
+                                         ],
+                                     format='JPEG',
+                                     options={'quality': 100})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     price = models.IntegerField()
@@ -28,3 +46,4 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
