@@ -147,3 +147,12 @@ def make_cloud(request):
     image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')
 
+
+def popular_tags(request):
+    articles = Article.objects.all()
+    articles_hash = Article.objects.values('hashtags')
+    context = {
+        'articles': articles,
+        'articles_hash': articles_hash,
+    }
+    return redirect('articles:index')
