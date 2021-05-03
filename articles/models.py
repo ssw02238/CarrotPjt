@@ -20,7 +20,11 @@ class Article(models.Model):
     content = models.TextField()
     image = models.ImageField(blank=True)
     image_thumbnail_detail = ImageSpecField(source='image',
-                                     processors=[ResizeToFill(670, 500)],
+                                     processors=[
+                                         #  이미지 회전 방지
+                                         Transpose(),
+                                         ResizeToFill(670, 500)
+                                         ],
                                      format='JPEG',
                                      options={'quality': 100})
     image_thumbnail_index = ImageSpecField(source='image',
