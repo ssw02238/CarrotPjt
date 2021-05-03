@@ -78,7 +78,7 @@
         <li class="my-2 me-4 d-inline-block">
           <div class="fw-bold">{{ comment.user }}</div>
           <div>{{ comment.content }}</div>
-          <div style="font-size: 11px; color: #868e96;">{{ comment.updated_at }}</div>
+          <div style="font-size: 11px; color: #868e96;">{{ comment.created_at }}</div>
         </li>
         <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" class="d-inline">
           {% csrf_token %}

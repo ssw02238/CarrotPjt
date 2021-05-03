@@ -149,7 +149,7 @@ def make_cloud(request):
     image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')
 
-def popular_tag(request):
+def popular_tags(request):
     # rank 확인용
     hashtags = Hashtag.objects.annotate(
         total_article = Count('article')
