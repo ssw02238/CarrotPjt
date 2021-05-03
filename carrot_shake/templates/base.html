@@ -68,13 +68,13 @@
           {% comment %} <a class="nav-link text-dark" href="{% url 'accounts:update' %}">User:Update</a> {% endcomment %}
           <form action="{% url 'accounts:logout' %}" method="POST">
             {% csrf_token %}
-            <button class="btn btn-link text-decoration-none text-dark"><i class="fas fa-user-minus fa-lg"></i></button>
+            <button class="btn btn-link text-decoration-none text-dark">Logout</button>
           </form>
         {# 익명 유저 #}
         {% else %}
-          <a class="navbar-brand" href="{% url 'articles:index' %}"><i class="fas fa-question fa-lg"></i></a>
-          <a class="nav-link text-dark" href="{% url 'accounts:login' %}"><i class="far fa-user-circle fa-lg"></i></a>
-          <a class="nav-link text-dark" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus fa-lg"></i></a>
+          <a class="navbar-brand" href="{% url 'articles:index' %}">Guest</a>
+          <a class="nav-link text-dark" href="{% url 'accounts:login' %}">Login</a>
+          <a class="nav-link text-dark" href="{% url 'accounts:signup' %}">Signup</a>
         {% endif %}
       </div>
     </div>
