@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h1>Popular tag</h1>
+<p style='color:purple;'>가장 HOT한 매물을 확인해보세요!</p>
+<i class="bi bi-arrow-down"></i>
+<hr>
+  <table class="table table-light" style="width: 200px" >
+        <thead>
+          <tr class="table-info">
+            <th scope="col" >Rank</th>
+            <th scope="col" >Hashtag</th>
+            <th scope="col" >Count</th>
+
+          </tr>
+        </thead>
+        {% for hash in hashtags %}
+        <tbody>
+        <div>
+          <tr>
+            <td>{{ hash.id }}</td>
+            <td><a href="http://127.0.0.1:8000/articles/{{ hash.pk }}/hashtag/">{{ hash.content }}</td></a>
+            <td>{{ hash.total_article }}</td>
+          </tr> 
+          </div>
+        </tbody>
+        {% endfor %}     
+      </table> 
+{% endblock content %}
