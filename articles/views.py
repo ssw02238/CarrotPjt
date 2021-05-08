@@ -5,7 +5,8 @@ from django.conf import settings
 from wordcloud import WordCloud, STOPWORDS
 from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
+from django.db.models import Count
 
 # Create your views here.
 @require_safe
@@ -45,10 +46,12 @@ def detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
     comment_form = CommentForm()
     comments = article.comment_set.all()
+    hashtags = article.hashtags.all()
     context = {
         'article': article,
         'comments': comments,
         'comment_form': comment_form,
+        'hashtags': hashtags,
     }
     return render(request, 'articles/detail.html', context)
 
@@ -131,6 +134,7 @@ def hashtag(request, hash_pk):
         'articles': articles,
     }
     return render(request, 'articles/hashtag.html', context)
+   
 
 def make_cloud(request):
     # 전체 해시태그 받아오기
@@ -146,3 +150,13 @@ def make_cloud(request):
     image.save(str(settings.STATICFILES_DIRS[2]) + '/articles/cloud.jpeg')
     return render(request, 'articles/wordcloud.html')
 
+def popular_tags(request):
+    # rank 확인용
+    hashtags = Hashtag.objects.annotate(
+        total_article = Count('article')
+    ).order_by('-total_article')[:3]
+
+    context = {
+        'hashtags': hashtags,
+    }
+    return render(request, 'articles/popular_tag.html', context)

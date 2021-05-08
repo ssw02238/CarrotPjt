@@ -4,11 +4,11 @@
 <div class="card h-100" style="width: 18rem;">
   <a href="{% url 'articles:detail' article.pk %}">
     {% if article.image %}
-      <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.image }}">
+      <img src="{{ article.image_thumbnail_index.url }}" class="card-img-top img-thumbnail" alt="{{ article.image }}">
     {% endif %}
 
     <div class="card-body">
-      <h2 class="card-title">{{ article.title }}</h2>
+      <h2 class="card-title" style="font-family: 'Noto Serif KR', serif;">{{ article.title }}</h2>
       <p class="card-price">{{ article.price }}원</p>
       <div class="card-counts">
         <span>관심 {{ article.like_users.all|length }}</span>

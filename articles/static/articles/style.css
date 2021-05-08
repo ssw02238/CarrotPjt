@@ -10,3 +10,33 @@
     line-height: 1.5;
     margin-bottom: 4px;
 }
+
+.nickname {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+    color: #212529;
+    margin-top: 25px;
+    padding-bottom: 23px;
+}
+
+.article-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.6px;
+}
+
+.areticle-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.article-hashtag {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.46;
+    letter-spacing: -0.6px;
+    color: #32CDC9;
+}
