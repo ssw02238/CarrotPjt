@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load socialaccount %}
 
 {% block content %}
   <h1>Login</h1>
@@ -11,5 +12,6 @@
     <button class="btn btn-primary">Login</button>
   </form>
   <br>
+  <a href="{% provider_login_url "google" next="/articles/" %}">Google</a><br>
   <a href="{% url 'articles:index' %}">BACK</a>
 {% endblock  %}
