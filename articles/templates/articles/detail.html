@@ -33,7 +33,7 @@
   
   <hr>
   {% comment %} 글 내용 {% endcomment %}
-  <h1 class="article-title">{{ article.title }} ({{ article.comment_set.all|length }})</h1>
+  <h1 class="article-title" style="font-family: 'Noto Serif KR', serif;">{{ article.title }} ({{ article.comment_set.all|length }})</h1>
   <div class="article-hashtag">
     {% for hashtag in hashtags %}
       <span ><a href="{% url 'articles:hashtag' hashtag.pk %}" style="color: #868e96;">{{ hashtag }}</a></span>
