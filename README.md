@@ -52,40 +52,40 @@ https://www.notion.so/57ea11217eea40f5abd9b4b3a2e405cb?v=f7ab1e278c744e94be67ffd
 
 ### 완성 사진 
 
-- 메인 화면 
+- #### 메인 화면 
 
 ![image-20210710113857685](README.assets/image-20210710113857685.png)
 
 ![image-20210710113833610](README.assets/image-20210710113833610.png)
 
-- 게시글 
+- #### 게시글 
 
 ![image-20210710114011435](README.assets/image-20210710114011435.png)
 
-- 해시태그 
+- #### 해시태그 
 
 ![image-20210710114042289](image-20210710114042289.png)
 
-- Signup
+- #### Signup
 
 ![image-20210710114114961](README.assets/image-20210710114114961.png)
 
-- login
+- #### login
 
 ![image-20210710114131461](image-20210710114131461.png)
 
-- Hashtag cloud 
+- #### Hashtag cloud 
 
 ![image-20210710114211962](README.assets/image-20210710114211962.png)
 
-- 유행하는 아이템 보러가기 
+- #### 유행하는 아이템 보러가기 
 
 ![image-20210710114236453](README.assets/image-20210710114236453.png)
 
-- 문의사항 
+- #### 문의사항 
 
 ![image-20210710114307312](README.assets/image-20210710114307312.png)
 
-- 마이페이지 
+- #### 마이페이지 
 
 ![image-20210710114331429](README.assets/image-20210710114331429.png)
